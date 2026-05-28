@@ -1,0 +1,210 @@
+app:
+  description: '# Role
+
+    你是一名精通全网爆款文案的顶尖自媒体运营大师。擅长敏锐捕捉全网热点，并将其转化为小红书、公众号等平台的爆款文章。
+
+
+    # Goal
+
+    根据用户输入的任意“主题”或“关键词”，主动利用网络搜索工具查找最新素材，并结合知识库中的爆款排版规范，输出一篇高质量、高互动率的自媒体文案。
+
+
+    # Tools Using Rules (工具调用铁律 - 极为重要)
+
+    1. 【步骤一：全网搜索】收到用户的主...'
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: agent-chat
+  name: 客服03
+  use_icon_as_answer_icon: true
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/deepseek:0.0.17@f7a5c1d222d17ee419b17a80d6e4923838fe93788dc724a3af73fbc6990b3a32
+    version: null
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/duckduckgo:0.0.10@b3e2cb0a355285837b0f9bfefd938476f05fec45688d36b05298980c00079def
+    version: null
+kind: app
+model_config:
+  agent_mode:
+    enabled: true
+    max_iteration: 10
+    prompt: null
+    strategy: function_call
+    tools:
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: langgenius/duckduckgo/duckduckgo
+      provider_name: langgenius/duckduckgo/duckduckgo
+      provider_type: builtin
+      tool_label: DuckDuckGo AI聊天
+      tool_name: ddgo_ai
+      tool_parameters:
+        model: gpt-3.5
+        proxy_server: null
+        query: null
+      type: builtin
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: langgenius/duckduckgo/duckduckgo
+      provider_name: langgenius/duckduckgo/duckduckgo
+      provider_type: builtin
+      tool_label: DuckDuckGo 图片搜索
+      tool_name: ddgo_img
+      tool_parameters:
+        max_results: 3
+        proxy_server: null
+        query: null
+        size: null
+        timelimit: null
+      type: builtin
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: langgenius/duckduckgo/duckduckgo
+      provider_name: langgenius/duckduckgo/duckduckgo
+      provider_type: builtin
+      tool_label: DuckDuckGo 搜索
+      tool_name: ddgo_search
+      tool_parameters:
+        max_results: 5
+        proxy_server: null
+        query: null
+        require_summary: false
+      type: builtin
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: langgenius/duckduckgo/duckduckgo
+      provider_name: langgenius/duckduckgo/duckduckgo
+      provider_type: builtin
+      tool_label: DuckDuckGo 翻译
+      tool_name: ddgo_translate
+      tool_parameters:
+        proxy_server: null
+        query: null
+        translate_to: en
+      type: builtin
+  annotation_reply:
+    enabled: false
+  chat_prompt_config:
+    prompt:
+    - role: system
+      text: ''
+  completion_prompt_config:
+    conversation_histories_role:
+      assistant_prefix: ''
+      user_prefix: ''
+    prompt:
+      text: ''
+  dataset_configs:
+    datasets:
+      datasets:
+      - dataset:
+          enabled: true
+          id: 7add450a-7ff8-4fa3-b6c4-c7357312517c
+    metadata_filtering_mode: disabled
+    reranking_mode: reranking_model
+    reranking_model:
+      reranking_model_name: ''
+      reranking_provider_name: ''
+    retrieval_model: multiple
+    top_k: 4
+  dataset_query_variable: ''
+  external_data_tools: []
+  file_upload:
+    allowed_file_extensions:
+    - .JPG
+    - .JPEG
+    - .PNG
+    - .GIF
+    - .WEBP
+    - .SVG
+    - .MP4
+    - .MOV
+    - .MPEG
+    - .WEBM
+    allowed_file_types: []
+    allowed_file_upload_methods:
+    - remote_url
+    - local_file
+    enabled: false
+    image:
+      detail: high
+      enabled: false
+      number_limits: 3
+      transfer_methods:
+      - remote_url
+      - local_file
+    number_limits: 3
+  model:
+    completion_params:
+      stop: []
+    mode: chat
+    name: deepseek-v4-flash
+    provider: langgenius/deepseek/deepseek
+  more_like_this:
+    enabled: false
+  opening_statement: ''
+  pre_prompt: '# Role
+
+    你是一名精通全网爆款文案的顶尖自媒体运营大师。擅长敏锐捕捉全网热点，并将其转化为小红书、公众号等平台的爆款文章。
+
+
+    # Goal
+
+    根据用户输入的任意“主题”或“关键词”，主动利用网络搜索工具查找最新素材，并结合知识库中的爆款排版规范，输出一篇高质量、高互动率的自媒体文案。
+
+
+    # Tools Using Rules (工具调用铁律 - 极为重要)
+
+    1. 【步骤一：全网搜索】收到用户的主题后，你必须首先调用 你拥有的搜索工具，搜索与该主题相关的“最新热点”、“爆款观点”或“核心数据”，至少参考3个搜索结果。
+
+    2. 【步骤二：知识库对齐】在生成最终文案前，你必须调用 `知识库` 工具，检索“自媒体爆款排版与风格指南”，严格按照里面的emoji使用频率、段落结构、语气要求来撰写。
+
+
+    # Constraints
+
+    - 严禁直接凭空捏造数据，必须使用搜索工具获取最新的客观事实。
+
+    - 如果搜索不到内容，请尝试更换关键词再次搜索。
+
+    - 最终输出的文案必须包含：吸睛标题、黄金前三句、正文干货（多用emoji、短句、空行）、互动结尾（引导评论）。
+
+
+    # Workflow
+
+    1. 分析用户输入的文案主题。
+
+    2. 思考并调用【搜索工具】，查阅相关领域的最新爆款内容和资料。
+
+    3. 思考并调用【知识库工具】，回顾爆款文案的排版格式要求。
+
+    4. 整合所有信息，输出最终的爆款文案。
+
+    '
+  prompt_type: simple
+  retriever_resource:
+    enabled: true
+  sensitive_word_avoidance:
+    config: {}
+    enabled: false
+    type: ''
+  speech_to_text:
+    enabled: false
+  suggested_questions: []
+  suggested_questions_after_answer:
+    enabled: false
+  text_to_speech:
+    enabled: false
+    language: ''
+    voice: ''
+  user_input_form: []
+version: 0.6.0
